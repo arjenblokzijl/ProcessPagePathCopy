@@ -84,13 +84,14 @@ class ProcessPagePathCopy extends WireData implements Module, ConfigurableModule
 		$copyPathTemplates = $this->copyPathTemplates;
 		
 		if (count($wantedTemplates) > 0) {
+			// Find if some templates are used
 			$wantedTemplates = in_array($page->template->id, $copyPathTemplates);
 		} else {
+			// Otherwise set to true
 			$wantedTemplates = 1;
 		}
 		
-		
-		
+		// 
 		if ($wantedTemplates && $wantedStatus) {
 		
 			$actions = $event->return;
