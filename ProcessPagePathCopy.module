@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ProcessPagePathCopy 0.0.1 ProcessWire module
+ * ProcessPagePathCopy 0.0.9 ProcessWire module
  *
  * @author Arjen Blokzijl
  * @created 22/11/2012
@@ -51,7 +51,14 @@ class ProcessPagePathCopy extends WireData implements Module, ConfigurableModule
      *
      */
 	public function addScripts($event){
-		$this->config->scripts->add($this->config->urls->ProcessPagePathCopy . 'ProcessPagePathCopy.js');
+		// If use flash is checked use the ZeroClipboard plug-in
+		if ($this->useFlash) {
+			$this->config->scripts->add($this->config->urls->ProcessPagePathCopy . 'ZeroClipboard/ZeroClipboard.min.js');
+		}
+		// Else use soma's javascript
+		else {
+			$this->config->scripts->add($this->config->urls->ProcessPagePathCopy . 'ProcessPagePathCopy.js');
+		}
 	}    
 
     /**
@@ -92,7 +99,6 @@ class ProcessPagePathCopy extends WireData implements Module, ConfigurableModule
 			$wantedTemplates = 1;
 		}
 		
-		// 
 		if ($wantedTemplates && $wantedStatus) {
 		
 			$actions = $event->return;
@@ -135,6 +141,15 @@ class ProcessPagePathCopy extends WireData implements Module, ConfigurableModule
 		}
 		$field->value = $data['copyPathTemplates'];
 		$fields->add($field);
+		
+		$field = $modules->get('InputfieldCheckbox');
+		$field->attr('name', 'useFlash');
+		$checked = $data['useFlash'] ? 'checked' : '';
+		$field->attr('value', 1);
+		$field->attr('checked', $checked);
+		$field->label = "Use flash?";
+		$field->description = "If checked, the module will use the ZeroClipboard flash based copy to clipboard plug-in. This makes copy/pasting a bit easier.";
+		$fields->append($field);		
 		
 		return $fields;
      	
