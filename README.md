@@ -2,16 +2,12 @@
 
 ## Summary
 
-Enables user to copy the path of a visible (not hidden) and published page.
+Enables user to copy the path of a visible (not hidden) and published page. No use of flash but this module used a simple selected input box to speed up the workflow.
 
 Additionally, you can:
 
 1. Specify the prefix (either: none, HTTP or HTTPS)
 2. Select templates to which the copy path action has to applied.
-
-## Todo
-
-1. Enable some kind of flash enabled click-to-clipboard functionality like ZeroClipboard (https://github.com/jonrohan/ZeroClipboard).
 
 ## How to install
 
